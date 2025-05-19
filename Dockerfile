@@ -1,20 +1,12 @@
-# -------- Stage 1: Build the application --------
+# Use Maven image to build the app
 FROM maven:3.9.6-eclipse-temurin-17 AS build
 WORKDIR /app
-
-# Copy Maven project files
-COPY pom.xml .
-RUN mvn dependency:go-offline
-
-# Copy source code and build
-COPY src ./src
+COPY . .
 RUN mvn clean package -DskipTests
 
-# -------- Stage 2: Run the application --------
-FROM eclipse-temurin:17-jdk
+# Use a smaller image to run the app
+FROM eclipse-temurin:17
 WORKDIR /app
-
-COPY --from=build /app/target/RogCryptoBackend-0.0.1-SNAPSHOT.jar app.jar
-
+COPY --from=build /app/target/*.jar app.jar
 EXPOSE 8080
 ENTRYPOINT ["java", "-jar", "app.jar"]
