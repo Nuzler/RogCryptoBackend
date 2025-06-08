@@ -2,7 +2,6 @@ package com.example.RogCryptoBackend.services;
 
 import java.io.IOException;
 import java.util.ArrayList;
-import java.util.Base64;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -67,7 +66,7 @@ public class BlogServices {
            
             map.put("title",blog.getTitle());
             map.put("imgUrl",blog.getImgUrl());
-            map.put("imageUrl", Base64.getEncoder().encodeToString(blog.getImageUrl()));
+            
             return map;
 
         }).collect(Collectors.toList());
