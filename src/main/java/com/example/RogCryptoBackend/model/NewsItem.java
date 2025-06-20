@@ -14,6 +14,7 @@ public class NewsItem {
     private String author;
     private String publishedDate;
     private String description;
+    private String contentEncoded;
     private String rawDesc;
    
     
